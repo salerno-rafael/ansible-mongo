@@ -1,0 +1,38 @@
+
+- hosts: 127.0.0.1
+  vars:  
+    http_port: 80  
+    max_clients: 200  
+  remote_user: vagrant  
+  tasks:
+
+  - name: add repo file
+    become: yes
+    become_method: sudo
+    shell: 'cp /home/vagrant/ansible-mongodb/templates/mongodb-org-3.4.repo /etc/yum.repos.d/'  
+
+  - name: install mongodb
+    become: yes
+    become_method: sudo
+    shell: 'yum install -y mongodb-org'
+    
+  - name: add repo file
+    become: yes
+    become_method: sudo
+    shell: 'cp /home/vagrant/ansible-mongodb/templates/mongod.conf /etc/'    
+
+  - name: run mongodb
+    become: yes
+    become_method: sudo
+    shell: 'service mongod start'
+
+  - name: monngo on
+    become: yes
+    become_method: sudo
+    shell: 'chkconfig mongod on'  
+
+  - name: stop mongodb
+    become: yes
+    become_method: sudo
+    shell: 'service mongod stop'  
+
