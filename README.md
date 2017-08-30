@@ -1,1 +1,1 @@
-# sensible-mongo
+# ansible-mongo
